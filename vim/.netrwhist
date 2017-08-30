@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/Users/psulkava/Documents/Fall2015/SWEN/project/trunk/mysite/todo/templates'
+let g:netrw_dirhist_2='/Users/psulkava/Documents/Fall2015/SWEN/project/trunk/mysite/health/static'
+let g:netrw_dirhist_3='/Users/psulkava/Documents/Fall2015/SWEN/project/trunk/mysite/health/templates'
+let g:netrw_dirhist_4='/Users/psulkava/.vim'
+let g:netrw_dirhist_5='/Users/psulkava/Documents/Fall2015/SWEN/project/trunk/mysite/health/static/js'
+let g:netrw_dirhist_6='/Users/psulkava/Documents/Fall2015/SWEN/project/trunk/.svn'
+let g:netrw_dirhist_7='/Users/psulkava/Documents/Fall2015/SWEN/project/trunk/mysite/health/templates'
+let g:netrw_dirhist_8='/Users/psulkava/.ssh'
+let g:netrw_dirhist_9='/Users/psulkava/.vim'
