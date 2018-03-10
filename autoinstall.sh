@@ -1,7 +1,7 @@
 #!/bin/sh
 # written by https://github.com/nvie
 
-INSTALL_TO=~/Projects
+INSTALL_TO=~/Dev
 
 warn() {
     echo "$1" >&2
