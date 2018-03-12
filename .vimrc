@@ -1,9 +1,10 @@
 set nocompatible
 filetype off
 
+" include powerline vim plugin
+source /usr/local/lib/python3.6/site-packages/powerline/bindings/vim/plugin/powerline.vim
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
-source /usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -19,16 +20,25 @@ Plugin 'vim-syntastic/syntastic'
 
 " auto complete
 Plugin 'Valloric/YouCompleteMe'
+
+" easy and sexy commenting
+Plugin 'scrooloose/nerdcommenter'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+" syntastic options
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-set t_Co=256
+" nerdcommenter options
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
 set background=dark
 colorscheme solarized
 syntax enable
