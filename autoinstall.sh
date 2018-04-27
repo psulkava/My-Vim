@@ -29,7 +29,6 @@ install_vimrc () {
     cd ~
     ln -s "$INSTALL_TO/My-Vim/vimrc" .vimrc
     ln -s "$INSTALL_TO/My-Vim/vim" .vim
-    touch ~/.vim/user.vim
 
     echo "Installed and configured .vim, have fun."
 }
