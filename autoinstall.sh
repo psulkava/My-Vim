@@ -18,7 +18,7 @@ install_vimrc () {
     [ -e "~/.vimrc" ] && die "~/.vimrc already exists."
 
     cd "$INSTALL_TO"
-    git clone git://github.com/psulkava/My-Vim.git
+    git clone https://github.com/psulkava/My-Vim.git
     cd My-Vim
 
     # Download vim plugin bundles
@@ -29,7 +29,6 @@ install_vimrc () {
     cd ~
     ln -s "$INSTALL_TO/My-Vim/vimrc" .vimrc
     ln -s "$INSTALL_TO/My-Vim/vim" .vim
-    touch ~/.vim/user.vim
 
     echo "Installed and configured .vim, have fun."
 }
