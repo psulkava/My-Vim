@@ -27,13 +27,20 @@ Plugin 'scrooloose/nerdcommenter'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+let g:polyglot_disabled = ['css', 'less']
+
 " syntastic options
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = []
-autocmd FileType javascript let b:syntastic_checkers = findfile('.eslintrc', '.;') !=# '' ? ['eslint'] : ['jshint']
+augroup vimrc_autocmd
+    autocmd!
+    autocmd FileType javascript let b:syntastic_checkers = findfile('.eslintrc', '.;') !=# '' ? ['eslint'] : ['jshint']
+augroup END
+let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
+let b:syntastic_javascript_eslint_exec = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 
 " nerdcommenter options
 " Add spaces after comment delimiters by default
@@ -48,8 +55,8 @@ set tabstop=4 softtabstop=4 shiftwidth=4 expandtab " 4 space tabs
 set number              " line numbers
 set ruler               " show column number
 set showcmd             " show command in bottom bar"
-set cursorline          " highlight current line"
 set wildmenu            " visual autocomplete for command menu"
+set ttyfast             " fast terminal connection
 set lazyredraw          " redraw only when we need to."
 set showmatch           " highlight matching [{()}]}]"
 
