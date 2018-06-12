@@ -2,7 +2,7 @@ set nocompatible
 filetype off
 
 " include powerline vim plugin
-source /usr/local/lib/python3.6/site-packages/powerline/bindings/vim/plugin/powerline.vim
+source /usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -32,6 +32,8 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = []
+autocmd FileType javascript let b:syntastic_checkers = findfile('.eslintrc', '.;') !=# '' ? ['eslint'] : ['jshint']
 
 " nerdcommenter options
 " Add spaces after comment delimiters by default
@@ -39,11 +41,9 @@ let g:NERDSpaceDelims = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-set background=dark
-colorscheme solarized
 syntax enable
 set ttymouse=xterm2
-set mouse=a
+set mouse=r
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab " 4 space tabs
 set number              " line numbers
 set ruler               " show column number
