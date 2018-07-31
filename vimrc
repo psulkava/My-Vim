@@ -23,6 +23,10 @@ Plugin 'Valloric/YouCompleteMe'
 
 " easy and sexy commenting
 Plugin 'scrooloose/nerdcommenter'
+
+" easy surrounding with parantheses, brackets, quotes, XML tags, etc.
+Plugin 'tpope/vim-surround'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -35,18 +39,23 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = []
+
+let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
+let b:syntastic_javascript_eslint_exec = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+let b:syntastic_vue_eslint_exec = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+
 augroup vimrc_autocmd
     autocmd!
     autocmd FileType javascript let b:syntastic_checkers = findfile('.eslintrc', '.;') !=# '' ? ['eslint'] : ['jshint']
 augroup END
-let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
-let b:syntastic_javascript_eslint_exec = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 
 " nerdcommenter options
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
+
+let $BASH_ENV = "~/.bash_aliases" " enable aliases in Vim shell
 
 syntax enable
 set ttymouse=xterm2
@@ -75,4 +84,8 @@ endif
 let mapleader = ','
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
-map <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+map <leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+map <leader>ll :lnext<CR>
+map <leader>lp :lprev<CR>
+map <leader>lj :lclose<CR>
+map <leader>sh :!shipit<CR>
