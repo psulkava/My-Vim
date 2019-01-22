@@ -27,6 +27,12 @@ Plugin 'scrooloose/nerdcommenter'
 " easy surrounding with parantheses, brackets, quotes, XML tags, etc.
 Plugin 'tpope/vim-surround'
 
+" use local vimrc files
+Plugin 'embear/vim-localvimrc'
+
+" git wrapper
+Plugin 'tpope/vim-fugitive'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -40,13 +46,24 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = []
 
+let g:vue_disable_pre_processors=1
+
+let g:syntastic_html_tidy_ignore_errors=["is not recognized", "unescaped \&", "discarding unexpected"]
+
 let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
 let b:syntastic_javascript_eslint_exec = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 let b:syntastic_vue_eslint_exec = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 
+function! HasConfig(file, dir)
+    return findfile(a:file, escape(a:dir, ' ') . ';') !=# ''
+endfunction
+
 augroup vimrc_autocmd
     autocmd!
-    autocmd FileType javascript let b:syntastic_checkers = findfile('.eslintrc', '.;') !=# '' ? ['eslint'] : ['jshint']
+    autocmd FileType javascript,javascript.jsx let b:syntastic_checkers =
+        \ HasConfig('.eslintrc', expand('<amatch>:h')) ? ['eslint'] :
+        \ HasConfig('.jshintrc', expand('<amatch>:h')) ? ['jshint'] :
+        \   ['eslint']
 augroup END
 
 " nerdcommenter options
@@ -75,6 +92,9 @@ set hlsearch            " highlight matches
 set laststatus=2
 set termencoding=utf-8
 set encoding=utf-8
+
+set exrc                " allow project specific vimrc files
+set secure              " disable commands from being run from project specific vimrc files unless owned by me
 
 if has('persistent_undo')
     set undofile
